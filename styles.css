@@ -371,8 +371,145 @@ body {
 }
 
 /* ================================
-   HERO SECTION
+   GEOMETRIC SHAPES ANIMATION
    ================================ */
+
+.geometric-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.geo-shape {
+    position: absolute;
+    opacity: 0.6;
+    animation: floatGeometric 8s ease-in-out infinite;
+}
+
+.geo-circle-1 {
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    top: 10%;
+    right: 15%;
+    animation-delay: 0s;
+    opacity: 0.3;
+}
+
+.geo-triangle-1 {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid var(--accent-color);
+    top: 60%;
+    left: 10%;
+    animation-delay: 1s;
+    opacity: 0.4;
+}
+
+.geo-square-1 {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--secondary-color), transparent);
+    border: 1px solid var(--secondary-color);
+    top: 25%;
+    left: 5%;
+    animation-delay: 2s;
+    opacity: 0.3;
+    transform: rotate(45deg);
+}
+
+.geo-circle-2 {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: 20%;
+    right: 25%;
+    animation-delay: 3s;
+    opacity: 0.5;
+}
+
+.geo-diamond-1 {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    transform: rotate(45deg);
+    top: 70%;
+    right: 10%;
+    animation-delay: 4s;
+    opacity: 0.4;
+}
+
+.geo-triangle-2 {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-top: 43px solid var(--secondary-color);
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 5s;
+    opacity: 0.3;
+}
+
+@keyframes floatGeometric {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(180deg);
+    }
+    75% {
+        transform: translateY(-30px) rotate(270deg);
+    }
+}
+
+/* Special rotation for square */
+.geo-square-1 {
+    animation: floatSquare 10s ease-in-out infinite;
+}
+
+@keyframes floatSquare {
+    0%, 100% {
+        transform: rotate(45deg) translateY(0);
+    }
+    25% {
+        transform: rotate(135deg) translateY(-15px);
+    }
+    50% {
+        transform: rotate(225deg) translateY(-5px);
+    }
+    75% {
+        transform: rotate(315deg) translateY(-25px);
+    }
+}
+
+/* Special animation for diamonds */
+.geo-diamond-1 {
+    animation: floatDiamond 12s ease-in-out infinite;
+}
+
+@keyframes floatDiamond {
+    0%, 100% {
+        transform: rotate(45deg) scale(1);
+    }
+    33% {
+        transform: rotate(135deg) scale(1.2);
+    }
+    66% {
+        transform: rotate(225deg) scale(0.8);
+    }
+}
 
 .hero {
     min-height: 100vh;
@@ -392,6 +529,34 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="2" fill="%23D2691E" opacity="0.03"/><circle cx="800" cy="300" r="1.5" fill="%23FF6B35" opacity="0.04"/><circle cx="400" cy="700" r="1" fill="%238B4513" opacity="0.03"/></svg>');
     pointer-events: none;
+}
+
+/* Geometric Shapes */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Large circle top-right */
+        radial-gradient(circle at 85% 15%, rgba(210,105,30,0.08) 0%, transparent 25%),
+        /* Triangle bottom-left */
+        linear-gradient(135deg, transparent 45%, rgba(139,69,19,0.05) 50%, transparent 55%),
+        /* Diamond center-left */
+        linear-gradient(45deg, transparent 30%, rgba(255,107,53,0.06) 35%, transparent 40%),
+        /* Hexagon top-left */
+        radial-gradient(ellipse at 20% 20%, rgba(210,105,30,0.04) 0%, transparent 30%),
+        /* Rectangle bottom-right */
+        linear-gradient(225deg, transparent 60%, rgba(139,69,19,0.03) 65%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-container {
@@ -954,8 +1119,9 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    align-items: stretch;
 }
 
 .service-card {
@@ -968,7 +1134,8 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 420px;
+    justify-content: space-between;
 }
 
 .service-card::before {
@@ -996,6 +1163,7 @@ body {
     background: var(--gradient-primary);
     color: white;
     transform: scale(1.02);
+    min-height: 440px;
 }
 
 .service-card.featured::before {
@@ -1014,6 +1182,10 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.service-header {
+    flex-shrink: 0;
 }
 
 .service-icon {
@@ -1044,12 +1216,13 @@ body {
 
 .service-card h3 {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 1rem;
     position: relative;
     z-index: 1;
+    line-height: 1.3;
 }
 
 .service-card.featured h3 {
@@ -1062,6 +1235,7 @@ body {
     line-height: 1.6;
     position: relative;
     z-index: 1;
+    font-size: 0.95rem;
 }
 
 .service-card.featured p {
@@ -1074,25 +1248,25 @@ body {
     z-index: 1;
     flex-grow: 1;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .service-list li {
-    padding: 0.75rem 0;
+    padding: 0.6rem 0;
     color: var(--text-medium);
     position: relative;
     padding-left: 1.5rem;
-    font-size: 0.95rem;
-    border-bottom: 1px solid rgba(139, 69, 19, 0.05);
-}
-
-.service-list li:last-child {
-    border-bottom: none;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 .service-list li::before {
     content: '✓';
     position: absolute;
     left: 0;
+    top: 0.6rem;
     color: var(--accent-color);
     font-weight: 600;
     font-size: 1rem;
@@ -1100,11 +1274,6 @@ body {
 
 .service-card.featured .service-list li {
     color: white;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.service-card.featured .service-list li:last-child {
-    border-bottom: none;
 }
 
 .service-card.featured .service-list li::before {
